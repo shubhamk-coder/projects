@@ -85,6 +85,13 @@ body {
     padding: 8px 30px;
     margin: 5px;
     font-size: 14px;
+    
+    justify-content: center;
+}
+
+.btns {
+    margin-left: 73px;
+
 }
 
 .btn:active {
