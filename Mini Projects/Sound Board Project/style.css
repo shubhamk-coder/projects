@@ -5,7 +5,7 @@
 }
   
 body {
-    background-color: rgba(161, 100, 223);
+    background-color: rgb(161, 100, 223);
     font-family: 'Poppins', sans-serif;
     display: flex;
     flex-wrap: wrap;
@@ -26,6 +26,7 @@ body {
     padding: 1.5rem 3rem;
     font-size: 1.2rem;
     font-family: inherit;
+    cursor: pointer;
 }
 
 .btn:hover {

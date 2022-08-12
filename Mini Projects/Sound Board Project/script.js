@@ -11,13 +11,13 @@ sounds.forEach(sound => {
         document.getElementById(sound).play();
     })
 
-    document.getElementsById('buttons').appendChild(btn);
+    document.getElementById('buttons').appendChild(btn);
 })
 
 function stopSounds() {
     sounds.forEach(sound => {
         const song = document.getElementById(sound);
-        song.onpause();
+        song.pause();
         song.currentTime = 0;
     })
 }
