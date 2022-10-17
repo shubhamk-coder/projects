@@ -4,9 +4,9 @@ import Card from "./Card";
 import styled from "styled-components";
 
 export default React.memo(function CardSlider({ data, title }) {
+  const listRef = useRef();
   const [showControls, setShowControls] = useState(false);
   const [sliderPosition, setSliderPosition] = useState(0);
-  const listRef = useRef();
 
   const handleDirection = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 70;
@@ -23,6 +23,7 @@ export default React.memo(function CardSlider({ data, title }) {
   return (
     <Container
       className="flex column"
+      showControls={showControls}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >

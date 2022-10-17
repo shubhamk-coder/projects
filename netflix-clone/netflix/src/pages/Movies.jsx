@@ -11,18 +11,19 @@ import { fetchMovies, getGenres } from "../store";
 import { firebaseAuth } from "../utils/firebase-config";
 
 export default function Movies() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [user, setUser] = useState(undefined);
+  const [isScrolled, setIsScrolled] = useState(false);
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
   const movies = useSelector((state) => state.netflix.movies);
   const genres = useSelector((state) => state.netflix.genres);
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGenres());
   }, []);
 
   useEffect(() => {
-    if (genresLoaded) dispatch(fetchMovies({ type: "movies" }));
+    if (genresLoaded) dispatch(fetchMovies({ genres, type: "movie" }));
   }, [genresLoaded]);
 
   window.onscroll = () => {
@@ -31,7 +32,8 @@ export default function Movies() {
   };
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
-    // if (currentUser) navigate("/");
+    if (currentUser) setUser(currentUser.uid);
+    else navigate("/login");
   });
 
   return (

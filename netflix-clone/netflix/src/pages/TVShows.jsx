@@ -11,37 +11,55 @@ import { fetchMovies, getGenres } from "../store";
 import { firebaseAuth } from "../utils/firebase-config";
 
 export default function TVShows() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [user, setUser] = useState(undefined);
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
+  const dataLoading = useSelector((state) => state.netflix.dataLoading);
   const movies = useSelector((state) => state.netflix.movies);
   const genres = useSelector((state) => state.netflix.genres);
-  const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getGenres());
+    if (!genres.length) {
+      dispatch(getGenres());
+    }
   }, []);
 
   useEffect(() => {
-    if (genresLoaded) dispatch(fetchMovies({ type: "tv" }));
+    if (genresLoaded) {
+      dispatch(fetchMovies({ genres, type: "tv" }));
+    }
   }, [genresLoaded]);
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) {
+      setUser(currentUser.uid);
+    } else {
+      navigate("/login");
+    }
+  });
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    // if (currentUser) navigate("/");
-  });
-
   return (
     <Container>
-      <div className="navbar">
-        <Navbar isScrolled={isScrolled} />
-      </div>
+      <Navbar isScrolled={isScrolled} />
       <div className="data">
-        <SelectGenre genres={genres} type="movie" />
-        {movies.length ? <Slider movies={movies} /> : <NotAvailable />}
+        <SelectGenre genres={genres} type="tv" />
+        {movies.length ? (
+          <>
+            <Slider movies={movies} />
+          </>
+        ) : (
+          <h1 className="not-available">
+            No TV Shows avaialble for the selected genre. Please select a
+            different genre.
+          </h1>
+        )}
       </div>
     </Container>
   );
@@ -52,7 +70,6 @@ const Container = styled.div`
     margin-top: 8rem;
     .not-available {
       text-align: center;
-      color: white;
       margin-top: 4rem;
     }
   }

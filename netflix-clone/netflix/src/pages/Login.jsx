@@ -1,69 +1,52 @@
-/* eslint-disable react/jsx-no-undef */
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 
-export default function Login() {
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
-  });
 
-  const handleLogIn = async () => {
+  const handleLogin = async () => {
     try {
-      const { email, password } = formValues;
       await signInWithEmailAndPassword(firebaseAuth, email, password);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error.code);
     }
   };
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) navigate("/");
   });
+
   return (
     <Container>
       <BackgroundImage />
       <div className="content">
         <Header />
-        <div className="form-cotainer flex column a-center j-center">
+        <div className="form-container flex column a-center j-center">
           <div className="form flex column a-center j-center">
             <div className="title">
               <h3>Login</h3>
             </div>
             <div className="container flex column">
               <input
-                type="email"
-                placeholder="Email Address"
-                name="email"
-                value={formValues.email}
-                onChange={(e) =>
-                  setFormValues({
-                    ...formValues,
-                    [e.target.name]: e.target.value,
-                  })
-                }
+                type="text"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
-
               <input
                 type="password"
                 placeholder="Password"
-                name="password"
-                value={formValues.password}
-                onChange={(e) =>
-                  setFormValues({
-                    ...formValues,
-                    [e.target.name]: e.target.value,
-                  })
-                }
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
               />
-
-              <button onClick={handleLogIn}>Log In</button>
+              <button onClick={handleLogin}>Login to your account</button>
             </div>
           </div>
         </div>
@@ -78,10 +61,9 @@ const Container = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
     height: 100vh;
     width: 100vw;
-    display: grid;
+    background-color: rgba(0, 0, 0, 0.5);
     grid-template-rows: 15vh 85vh;
     .form-container {
       gap: 2rem;
@@ -113,3 +95,5 @@ const Container = styled.div`
     }
   }
 `;
+
+export default Login;

@@ -9,24 +9,34 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, getGenres } from "../store";
 import Slider from "../components/Slider";
+import { firebaseAuth } from "../utils/firebase-config";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function Netflix() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const navigate = useNavigate();
-  const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
-  const movies = useSelector((state) => state.netflix.movies);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
+  const genres = useSelector((state) => state.netflix.genres);
+  const movies = useSelector((state) => state.netflix.movies);
+
   useEffect(() => {
     dispatch(getGenres());
   }, []);
 
   useEffect(() => {
-    if (genresLoaded) dispatch(fetchMovies({ type: "all" }));
+    if (genresLoaded) {
+      dispatch(fetchMovies({ genres, type: "all" }));
+    }
   }, [genresLoaded]);
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (!currentUser) navigate("/login");
+  });
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => Netflix((window.onscroll = null));
+    return () => (window.onscroll = null);
   };
 
   return (
@@ -44,12 +54,12 @@ export default function Netflix() {
           </div>
           <div className="buttons flex">
             <button
-              className="flex j-center-a-center"
+              className="flex j-center a-center"
               onClick={() => navigate("/player")}
             >
               <FaPlay /> Play
             </button>
-            <button className="flex j-center-a-center">
+            <button className="flex j-center a-center">
               <AiOutlineInfoCircle /> More Info
             </button>
           </div>
@@ -94,7 +104,7 @@ const Container = styled.div`
           border: none;
           cursor: pointer;
           transition: 0.3s ease-in-out;
-          %:hover {
+          &:hover {
             opacity: 0.8;
           }
           &:nth-of-type(2) {
