@@ -16,11 +16,6 @@ export default function Navbar({ isScrolled }) {
     { name: "My List", link: "/mylist" },
   ];
 
-  /* const navigate = useNavigate();
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (!currentUser) navigate("/login");
-  }); */
-
   return (
     <Container>
       <nav className={`${isScrolled ? "scrolled" : ""} flex`}>
@@ -126,8 +121,13 @@ const Container = styled.div`
         padding-left: 0.5rem;
         .button {
           background-color: transparent;
+          border: none;
+          &:focus {
+            outline: none;
+          }
           svg {
             color: white;
+            font-size: 1.2rem;
           }
         }
         input {

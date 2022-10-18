@@ -26,15 +26,15 @@ export default function Movies() {
     if (genresLoaded) dispatch(fetchMovies({ genres, type: "movie" }));
   }, [genresLoaded]);
 
-  window.onscroll = () => {
-    setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => (window.onscroll = null);
-  };
-
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) setUser(currentUser.uid);
     else navigate("/login");
   });
+
+  window.onscroll = () => {
+    setIsScrolled(window.pageYOffset === 0 ? false : true);
+    return () => (window.onscroll = null);
+  };
 
   return (
     <Container>

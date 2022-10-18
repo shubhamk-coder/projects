@@ -36,7 +36,7 @@ export default React.memo(function CardSlider({ data, title }) {
         >
           <AiOutlineLeft onClick={() => handleDirection("left")} />
         </div>
-        <div className="flex slider" ref={listRef}>
+        <div className="slider flex" ref={listRef}>
           {data.map((movie, index) => {
             return <Card movieData={movie} index={index} key={movie.id} />;
           })}
@@ -46,7 +46,7 @@ export default React.memo(function CardSlider({ data, title }) {
             !showControls ? "none" : ""
           } flex j-center a-center`}
         >
-          <AiOutlineRight onClick={() => handleDirection("Right")} />
+          <AiOutlineRight onClick={() => handleDirection("right")} />
         </div>
       </div>
     </Container>
@@ -81,7 +81,7 @@ const Container = styled.div`
       }
     }
     .none {
-      ${"" /* display:none */}
+      display: none;
     }
     .left {
       left: 0;

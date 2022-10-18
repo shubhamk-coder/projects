@@ -26,14 +26,13 @@ const createArrayFromRawData = (array, moviesArray, genres) => {
       const name = genres.find(({ id }) => id === genre);
       if (name) movieGenres.push(name.name);
     });
-    if (movie.backdrop_path) {
+    if (movie.backdrop_path)
       moviesArray.push({
         id: movie.id,
         name: movie?.original_name ? movie.original_name : movie.original_title,
         image: movie.backdrop_path,
         genres: movieGenres.slice(0, 3),
       });
-    }
   });
 };
 
@@ -69,7 +68,7 @@ export const fetchDataByGenre = createAsyncThunk(
       netflix: { genres },
     } = thunkAPI.getState();
     return getRawData(
-      `${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genres}`,
+      `${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`,
       genres
     );
   }
@@ -87,10 +86,10 @@ export const getUsersLikedMovies = createAsyncThunk(
 
 export const removeFromLikedMovies = createAsyncThunk(
   "netflix/deleteLiked",
-  async ({ email, movieId }) => {
+  async ({ movieId, email }) => {
     const {
       data: { movies },
-    } = await axios.put(`http://localhost:5000/api/user/remove`, {
+    } = await axios.put("http://localhost:5000/api/user/remove", {
       email,
       movieId,
     });

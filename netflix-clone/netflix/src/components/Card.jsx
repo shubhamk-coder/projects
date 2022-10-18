@@ -56,7 +56,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
             />
             <video
               src={video}
-              autoPlay
+              autoPlay={true}
               loop
               muted
               onClick={() => navigate("/player")}

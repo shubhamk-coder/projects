@@ -22,8 +22,8 @@ export default function Signup() {
     try {
       const { email, password } = formValues;
       await createUserWithEmailAndPassword(firebaseAuth, email, password);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -74,7 +74,7 @@ export default function Signup() {
               <button onClick={() => setShowPassword(true)}>Get Started</button>
             )}
           </div>
-          <button onClick={handleSignIn}>Sign Up</button>
+          {showPassword && <button onClick={handleSignIn}>Sign Up</button>}
         </div>
       </div>
     </Container>

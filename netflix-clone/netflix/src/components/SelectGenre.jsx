@@ -9,7 +9,7 @@ export default function SelectGenre({ genres, type }) {
     <Select
       className="flex"
       onChange={(e) => {
-        dispatch(fetchDataByGenre({ genre: e.target.value, type }));
+        dispatch(fetchDataByGenre({ genres, genre: e.target.value, type }));
       }}
     >
       {genres.map((genre) => {

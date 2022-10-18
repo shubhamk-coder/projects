@@ -50,7 +50,7 @@ export default function Netflix() {
         />
         <div className="container">
           <div className="logo">
-            <img src={movieLogo} alt="movie Logo" />
+            <img src={movieLogo} alt="Movie Logo" />
           </div>
           <div className="buttons flex">
             <button
@@ -100,10 +100,10 @@ const Container = styled.div`
           border-radius: 0.2rem;
           padding: 0.5rem;
           padding-left: 2rem;
-          padding-right: 2rem;
+          padding-right: 2.4rem;
           border: none;
           cursor: pointer;
-          transition: 0.3s ease-in-out;
+          transition: 0.2s ease-in-out;
           &:hover {
             opacity: 0.8;
           }

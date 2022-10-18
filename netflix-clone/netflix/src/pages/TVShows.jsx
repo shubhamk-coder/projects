@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import NotAvailable from "../components/NotAvailable";
 import SelectGenre from "../components/SelectGenre";
 import Slider from "../components/Slider";
 import { fetchMovies, getGenres } from "../store";
 import { firebaseAuth } from "../utils/firebase-config";
 
-export default function TVShows() {
+function TVShows() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,3 +73,4 @@ const Container = styled.div`
     }
   }
 `;
+export default TVShows;
