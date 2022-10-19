@@ -4,7 +4,7 @@ import { signOut } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
-import { FaPowerOff, FaSearch } from "react-icons/fa";
+import { FaHome, FaPowerOff, FaSearch } from "react-icons/fa";
 
 export default function Navbar({ isScrolled }) {
   const [showSearch, setShowSearch] = useState(false);
@@ -21,7 +21,9 @@ export default function Navbar({ isScrolled }) {
       <nav className={`${isScrolled ? "scrolled" : ""} flex`}>
         <div className="left flex a-center">
           <div className="brand flex a-center j-center">
-            <img src={logo} alt="logo" />
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
           </div>
           <ul className="links flex">
             {links.map(({ name, link }) => {
