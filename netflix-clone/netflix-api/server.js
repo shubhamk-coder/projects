@@ -8,8 +8,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const DB = process.env.MONGO_URL;
+const port = process.env.PORT;
+
 mongoose
-  .connect("mongodb://localhost:27017/netflix", {
+  .connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -22,6 +25,6 @@ mongoose
 
 app.use("/api/user", userRoutes);
 
-app.listen(5000, () => {
-  console.log("server started on port 5000");
+app.listen(port, () => {
+  console.log(`server started on port ${port}`);
 });
