@@ -1,6 +1,7 @@
-import Head from 'next/head';
+/* eslint-disable quotes */
+import Head from "next/head";
 
-import '../styles/globals.css';
+import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps }) => (
   <>
@@ -9,7 +10,10 @@ const MyApp = ({ Component, pageProps }) => (
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
       <link rel="preconnect" href="https://stijndv.com" />
-      <link rel="stylesheet" href="https://stijndv.com/fonts/Eudoxus-Sans.css" />
+      <link
+        rel="stylesheet"
+        href="https://stijndv.com/fonts/Eudoxus-Sans.css"
+      />
     </Head>
     <Component {...pageProps} />
   </>
