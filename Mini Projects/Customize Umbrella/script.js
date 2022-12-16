@@ -88,7 +88,7 @@ fileInput.addEventListener("change", function (e) {
 
       // success message when the file is below 5MB
       fileResult.innerHTML =
-        "Success, your file is " + fileMb.toFixed(1) + "MB.";
+        "Success, your file size is " + fileMb.toFixed(1) + "MB.";
       fileInput.disabled = true;
 
       // removing all the applied changes
