@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Umbrella</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="pic" id="pic">
+        <img id="img" src="./assets/Blue umbrella.png" alt="blue umbrella" />
+        <img
+          src="./assets/logo.png"
+          class="loaded"
+          id="loaded"
+          alt="loaded file"
+        />
+      </div>
+      <div class="options">
+        <h1>Custom Umbrella</h1>
+        <span class="dot blue active"></span>
+        <span class="dot pink"></span>
+        <span class="dot yellow"></span>
+        <h3>Customize your umbrella</h3>
+        <h4>Upload a logo for an instant preview.</h4>
+        <h5>.png and .jpg files only. Max file size is 5MB.</h5>
+        <input type="file" id="actual-btn" accept=".png, .jpg" hidden />
+        <label for="actual-btn">
+          <img
+            src="./assets/upload_icon.png"
+            class="icon"
+            id="icon"
+            alt="upload_icon"
+          />
+          <div class="btntext" id="btnText">UPLOAD LOGO</div>
+          <img src="./assets/cross.svg" class="cross" id="cross" alt="cross" />
+        </label>
+        <p id="fileResult" class=""></p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
