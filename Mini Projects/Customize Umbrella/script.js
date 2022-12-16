@@ -35,7 +35,6 @@ for (let i = 0; i < circles.length; i++) {
       img.classList.remove("Pink", "blue", "yellow");
       img.classList.remove("loader");
       pic.classList.add("pic");
-      loaded.style.display = "none";
       if (cross.style.display != "none") {
         loaded.style.display = null;
       }
