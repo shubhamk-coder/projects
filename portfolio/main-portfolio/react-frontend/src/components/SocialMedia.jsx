@@ -15,7 +15,7 @@ const SocialMedia = () => {
         </div>
       </a>
       <a
-        href="https://www.linkedin.com/in/shubhamkamble89/"
+        href="https://twitter.com/shubhamkk89"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -24,7 +24,7 @@ const SocialMedia = () => {
         </div>
       </a>
       <a
-        href="https://www.linkedin.com/in/shubhamkamble89/"
+        href="https://www.instagram.com/mr.cool_shubz/"
         target="_blank"
         rel="noopener noreferrer"
       >
