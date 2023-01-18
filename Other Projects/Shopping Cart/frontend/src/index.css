@@ -35,3 +35,12 @@ main {
 .product-info {
   padding: 1rem;
 }
+
+.card {
+  height: 100%;
+  width: 100%;
+}
+.img-large {
+  padding-top: 1rem;
+  max-width: 100%;
+}

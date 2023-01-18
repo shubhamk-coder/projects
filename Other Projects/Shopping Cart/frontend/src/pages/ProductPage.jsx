@@ -1,6 +1,17 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import ListGroup from "react-bootstrap/ListGroup";
+import Badge from "react-bootstrap/Badge";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { Helmet } from "react-helmet-async";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import { getError } from "../utils";
+import { Store } from "../Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,17 +40,81 @@ function ProductPage() {
         const result = await axios.get(`/api/products/handle/${Handle}`);
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
     fetchData();
   }, [Handle]);
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const addToCartHandler = () => {
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...product, quantity: 1 },
+    });
+  };
+
   return loading ? (
-    <div>Loading...</div>
+    <LoadingBox />
   ) : error ? (
-    <div>{error}</div>
+    <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>{product.name}</div>
+    <div>
+      <Row>
+        <Col md={6}>
+          <img className="img-large" src={product.Imgsrc} alt={product.Title} />
+        </Col>
+        <Col md={3}>
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <Helmet>
+                <title>{product.Title}</title>
+              </Helmet>
+              <h2>{product.Title}</h2>
+            </ListGroup.Item>
+            <ListGroup.Item>Type : {product.Type}</ListGroup.Item>
+            <ListGroup.Item>Price : ${product.Price}</ListGroup.Item>
+            <ListGroup.Item>{product.Body}</ListGroup.Item>
+          </ListGroup>
+        </Col>
+        <Col md={3}>
+          <Card>
+            <Card.Body>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Price:</Col>
+                    <Col>${product.Price}</Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Status:</Col>
+                    <Col>
+                      {product.Qty > 0 ? (
+                        <Badge bg="success">In Stock</Badge>
+                      ) : (
+                        <Badge bg="danger">Out of Stock</Badge>
+                      )}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+
+                {product.Qty > 0 && (
+                  <ListGroup.Item>
+                    <div className="d-grid">
+                      <Button onClick={addToCartHandler} variant="primary">
+                        Add to Cart
+                      </Button>
+                    </div>
+                  </ListGroup.Item>
+                )}
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </div>
   );
 }
 

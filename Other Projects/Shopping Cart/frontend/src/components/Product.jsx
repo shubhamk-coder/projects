@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 function Product(props) {
   const { item } = props;
   return (
-    <Card key={item.Handle}>
+    <Card key={item.Handle} className="card">
       <Link to={`/product/${item.Handle}`}>
         <img src={item.Imgsrc} className="card-img-top" alt={item.Title} />
       </Link>
@@ -15,7 +15,7 @@ function Product(props) {
           <Card.Title>{item.Title}</Card.Title>
         </Link>
         <Card.Text>${item.Price}</Card.Text>
-        <Button>Add to cart</Button>
+        <Button>Add to Cart</Button>
       </Card.Body>
     </Card>
   );
