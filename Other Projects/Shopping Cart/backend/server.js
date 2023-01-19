@@ -17,6 +17,15 @@ app.get("/api/products/handle/:Handle", (req, res) => {
   }
 });
 
+app.get("/api/products/:Handle", (req, res) => {
+  const product = data.find((x) => x.Handle === req.params.Handle);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`serve at http://localhost:${port}`);
 });

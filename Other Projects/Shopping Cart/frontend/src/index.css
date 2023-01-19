@@ -44,3 +44,7 @@ main {
   padding-top: 1rem;
   max-width: 100%;
 }
+
+.img-thumbnail {
+  height: 80px;
+}
