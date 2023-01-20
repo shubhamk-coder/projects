@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from "react";
-// import data from "../data/data.json";
 import axios from "axios";
 import logger from "use-reducer-logger";
 import Row from "react-bootstrap/Row";
@@ -34,7 +33,7 @@ function HomePage() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get("/api/products");
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+        dispatch({ type: "FETCH_SUCCESS", payload: result.data.products });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }

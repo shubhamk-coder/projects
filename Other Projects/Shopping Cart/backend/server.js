@@ -1,30 +1,19 @@
 import express from "express";
-import data from "./data.json" assert { type: "json" };
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import productRouter from "./routes/productRoutes.js";
+
+dotenv.config();
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("connected to db"))
+  .catch((err) => console.log(err));
 
 const app = express();
+
 const port = process.env.PORT || 5000;
 
-app.get("/api/products", (req, res) => {
-  res.send(data);
-});
-
-app.get("/api/products/handle/:Handle", (req, res) => {
-  const product = data.find((x) => x.Handle === req.params.Handle);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
-
-app.get("/api/products/:Handle", (req, res) => {
-  const product = data.find((x) => x.Handle === req.params.Handle);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
+app.use("/api/products", productRouter);
 
 app.listen(port, () => {
   console.log(`serve at http://localhost:${port}`);
