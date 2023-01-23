@@ -71,3 +71,10 @@ main {
 .active-nav {
   left: 0;
 }
+
+/* Searchbox */
+.navbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translatex(-50%);
+}

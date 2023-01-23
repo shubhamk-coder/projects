@@ -122,16 +122,20 @@ export default function SearchPage() {
                   Any
                 </Link>
               </li>
-              {categories.map((c) => (
-                <li key={c}>
-                  <Link
-                    className={c === category ? "text-bold" : ""}
-                    to={getFilterUrl({ category: c })}
-                  >
-                    {c}
-                  </Link>
-                </li>
-              ))}
+              {categories.map((c) =>
+                c !== "" ? (
+                  <li key={c}>
+                    <Link
+                      className={c === category ? "text-bold" : ""}
+                      to={getFilterUrl({ category: c })}
+                    >
+                      {c}
+                    </Link>
+                  </li>
+                ) : (
+                  ""
+                )
+              )}
             </ul>
           </div>
           <div>
@@ -205,7 +209,7 @@ export default function SearchPage() {
               <Row>
                 {products.map((product) => (
                   <Col sm={6} lg={4} className="mb-3" key={product._id}>
-                    <Product product={product}></Product>
+                    <Product item={product}></Product>
                   </Col>
                 ))}
               </Row>

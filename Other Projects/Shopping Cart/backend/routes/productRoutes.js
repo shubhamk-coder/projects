@@ -8,7 +8,7 @@ productRouter.get("/", async (req, res) => {
   const products = await Product.find();
   res.send({ products });
 });
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 6;
 
 productRouter.get(
   "/search",
@@ -24,18 +24,26 @@ productRouter.get(
     const queryFilter =
       searchQuery && searchQuery !== "all"
         ? {
-            name: {
+            Title: {
               $regex: searchQuery,
               $options: "i",
             },
           }
         : {};
-    const categoryFilter = category && category !== "all" ? { category } : {};
+    const categoryFilter =
+      category && category !== "all"
+        ? {
+            Type: {
+              $regex: category,
+              $options: "i",
+            },
+          }
+        : {};
     const priceFilter =
       price && price !== "all"
         ? {
             // 1-50
-            price: {
+            Price: {
               $gte: Number(price.split("-")[0]),
               $lte: Number(price.split("-")[1]),
             },
@@ -48,8 +56,6 @@ productRouter.get(
         ? { price: 1 }
         : order === "highest"
         ? { price: -1 }
-        : order === "toprated"
-        ? { rating: -1 }
         : order === "newest"
         ? { createdAt: -1 }
         : { _id: -1 };
