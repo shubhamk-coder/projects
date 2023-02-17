@@ -1,11 +1,10 @@
 import "./App.css";
-import FileUploader from "./components/FileUploader";
-import Folder from "./components/Folder";
+import Upload from "./pages/Upload.jsx";
 
 function App() {
   return (
     <div className="App">
-      <Folder />
+      <Upload />
     </div>
   );
 }
