@@ -9,7 +9,7 @@ const AppWrap = (Component, idName, classnames) =>
         <div className="app__wrapper app__flex">
           <Component />
           <div className="copyright">
-            <p className="p-text">&copy;2023 Shubhamkcoder</p>
+            <p className="p-text">&copy;2025 Shubhamkcoder</p>
             <p className="p-text">All rights reserved</p>
           </div>
         </div>

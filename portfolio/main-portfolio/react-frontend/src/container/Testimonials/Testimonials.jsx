@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
-import "./Testimonial.scss";
+import "./Testimonials.scss";
 
-const Testimonial = () => {
+const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [testimonials, setTestimonials] = useState([]);
   const [brands, setBrands] = useState([]);
@@ -55,8 +55,7 @@ const Testimonial = () => {
                     ? testimonials.length - 1
                     : currentIndex - 1
                 )
-              }
-            >
+              }>
               <HiChevronLeft />
             </div>
 
@@ -68,8 +67,7 @@ const Testimonial = () => {
                     ? 0
                     : currentIndex + 1
                 )
-              }
-            >
+              }>
               <HiChevronRight />
             </div>
           </div>
@@ -81,8 +79,7 @@ const Testimonial = () => {
           <motion.div
             whileInView={{ opacity: [0, 1] }}
             transition={{ duration: 0.5, type: "tween" }}
-            key={brand._id}
-          >
+            key={brand._id}>
             <img src={urlFor(brand.imgUrl)} alt={brand.name} />
           </motion.div>
         ))}
@@ -92,7 +89,7 @@ const Testimonial = () => {
 };
 
 export default AppWrap(
-  MotionWrap(Testimonial, "app__testimonial"),
-  "testimonial",
+  MotionWrap(Testimonials, "app__testimonial"),
+  "testimonials",
   "app__primarybg"
 );

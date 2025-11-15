@@ -1,1 +1,39 @@
-<h3>Express View Engine</h3>
+
+{{!-- section --}}
+<secttion class="section my-4">
+    <div class="container text-center">
+        <div class="title py-5">
+            <h1>Node Image Uploader</h1>
+            <p class="subtitle">Upload images to the <strong>Server</strong></p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <form action="/uploadmultiple" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-8">
+                        <input type="file" class="form-control" name="images" id="fromFile" multiple>
+                    </div>
+                    <div class="col-2">
+                        <input type="submit" class="btn btn-warning" id="uploadBtn" value="Upload Images">
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        {{!-- display images --}}
+        <section class="mt-5">
+            <div class="row">
+                <div class="col-3">
+                    <div class="card shadow" style="width: 18rem;">
+                        <img src="..." alt="..." class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title font-poppins">UI/UX Design</h5>
+                                <p class="text-secondary font-size-09">Some quick example text to build on the card</p>
+                                <a href="#" class="btn btn-info font-size-09 text-light">Read more...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</secttion>
